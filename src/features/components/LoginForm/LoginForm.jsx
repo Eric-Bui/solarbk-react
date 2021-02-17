@@ -2,11 +2,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputField from 'components/FormControl/InputField/InputField';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import Spinner from 'react-bootstrap/Spinner';
+import './LoginForm.scss'
+import loadingIcon from 'assets/images/loading.svg'
 
 LoginForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -14,7 +15,7 @@ LoginForm.propTypes = {
 
 function LoginForm(props) {
     const schema = yup.object().shape({
-        identifier: yup
+        username: yup
             .string()
             .required('Please enter your email')
             .email('Please enter a valid email address'),
@@ -22,7 +23,7 @@ function LoginForm(props) {
     });
     const form = useForm({
         defaultValues: {
-            identifier: '',
+            username: '',
             password: '',
         },
         resolver: yupResolver(schema),
@@ -38,17 +39,20 @@ function LoginForm(props) {
 
     const { isSubmitting } = form.formState;
     return (
-        <>
-            <Form onSubmit={form.handleSubmit(onSubmit)}>
-                <InputField name="identifier" type="email" label="Email" form={form} />
-                <InputField name="password" type="password" label="Password" form={form} />
+        <div className="form">
+            <div className="form__title">
+                <h5>Đăng nhập</h5>
+            </div>
+             <Form className="form-input" onSubmit={form.handleSubmit(onSubmit)}>
+                <InputField name="username" type="email" label="Tên đăng nhập" form={form} />
+                <InputField name="password" type="password" label="Mật khẩu" form={form} />
 
-                <Button disabled={isSubmitting} variant="primary" type="submit">
-                    {isSubmitting ? '' : 'Sign in'}
-                    {isSubmitting && <Spinner animation="border" variant="primary" />}
-                </Button>
+                <button className="btn-solar" disabled={isSubmitting} type="submit">
+                    {isSubmitting ? '' : 'Đăng nhập'}
+                    {isSubmitting && <img src={loadingIcon}/>}
+                </button>
             </Form>
-        </>
+        </div>
     );
 }
 

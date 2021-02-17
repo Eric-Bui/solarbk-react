@@ -1,1 +1,40 @@
 @import '~bootstrap/scss/bootstrap';
+
+$primary-color: #00c255;
+$secondary-color: #89c941;
+$white-color: #fff;
+$black-color: #000;
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-solar {
+    background-color: $primary-color;
+    color: $white-color;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: 0.2s;
+    min-width: 115px;
+    max-height: 44px;
+
+    &:hover {
+        color: $white-color;
+        background: #08a045;
+    }
+
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    }
+
+    &:disabled {
+        background: #08a045;
+        opacity: 0.65;
+    }
+}

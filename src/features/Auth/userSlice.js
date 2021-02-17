@@ -13,16 +13,16 @@ export const register = createAsyncThunk('users/register', async (payload) => {
 //login
 export const login = createAsyncThunk('users/login', async (payload) => {
     const data = await userApi.login(payload);
-
-    localStorage.setItem(StorageKeys.TOKEN, data.jwt);
-    localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
-    return data.user;
+    localStorage.setItem(StorageKeys.TOKEN, data.token);
+    localStorage.setItem(StorageKeys.NAME, JSON.stringify(data.username));
+    localStorage.setItem(StorageKeys.USER, JSON.stringify(data.email));
+    return data;
 });
 
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
+        current: {},
         settings: {},
     },
     reducers: {

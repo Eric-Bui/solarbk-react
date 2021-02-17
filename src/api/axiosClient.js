@@ -1,6 +1,7 @@
 import axios from 'axios';
+require('dotenv').config()
 const axiosClient = axios.create({
-    baseURL: 'https://api.ezfrontend.com/',
+    baseURL: process.env.REACT_APP_BASE_API + '/api/v1/',
     'Content-Type': 'application/json',
 });
 
@@ -19,8 +20,13 @@ axiosClient.interceptors.response.use(
         return response.data;
     },
     (error) => {
+        console.log(error);
         const { config, status, data } = error.response;
-        if (config.url === '/auth/local/register' && status === 400) {
+
+        const urlList = ['/auth/local/register', '/auth/local'];
+        const isUrlAssett = urlList.includes(config.url);
+
+        if (isUrlAssett && status === 400) {
             const errorList = data.data || [];
             const firstError = errorList.length > 0 ? errorList[0] : {};
             const messageList = firstError.messages || [];

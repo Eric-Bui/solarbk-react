@@ -6,7 +6,7 @@ const userApi = {
         return axiosClient.post(url, info);
     },
     login(info) {
-        const url = `/auth/local`;
+        const url = `login`;
         return axiosClient.post(url, info);
     },
 };

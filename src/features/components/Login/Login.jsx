@@ -8,7 +8,7 @@ import { login } from '../../Auth/userSlice';
 import LoginForm from '../LoginForm/LoginForm';
 
 Login.propTypes = {
-    closeRegister: PropTypes.func,
+    // closeRegister: PropTypes.func,
 };
 
 function Login(props) {
@@ -22,9 +22,9 @@ function Login(props) {
             const resultAction = await dispatch(action);
             const user = unwrapResult(resultAction);
             console.log('new User', user);
-            if (closeRegister) {
-                closeRegister();
-            }
+            // if (closeRegister) {
+            //     closeRegister();
+            // }
         } catch (error) {
             console.log('Error', error);
             notify('error', error.message || 'Something went wrong');
