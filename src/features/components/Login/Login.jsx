@@ -2,6 +2,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { login } from '../../Auth/userSlice';
@@ -22,12 +23,13 @@ function Login(props) {
             const resultAction = await dispatch(action);
             const user = unwrapResult(resultAction);
             console.log('new User', user);
+            <Redirect to="/home" />
             // if (closeRegister) {
             //     closeRegister();
             // }
-        } catch (error) {
-            console.log('Error', error);
-            notify('error', error.message || 'Something went wrong');
+        } catch (err) {
+            console.log('Error', err);
+            notify('error', err.message || 'Something went wrong');
         }
     };
     return (
