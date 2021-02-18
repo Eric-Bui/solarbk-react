@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CounterFeature from 'features/Counter';
 
-Home.propTypes = {};
+ListProject.propTypes = {};
 
-function Home(props) {
+function ListProject(props) {
     return (
         <div>
-            Home Components
+            ListProject Components
             <CounterFeature />
         </div>
     );
 }
 
-export default Home;
+export default ListProject;

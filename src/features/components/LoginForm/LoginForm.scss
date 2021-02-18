@@ -4,8 +4,29 @@
     padding: 30px;
     border-radius: 10px;
 
-    min-height: 421px;
+    // min-height: 421px;
     max-width: 600px;
     margin-left: auto;
     margin-top: 80px;
+
+    &__title {
+        text-align: center;
+    }
+
+    &-group {
+        font-size: 15px;
+        p {
+            font-size: 12px;
+            height: 20px;
+            color: #cf000f;
+        }
+    }
+
+    &-control {
+        color: #000;
+        &:focus,
+        &:active {
+            box-shadow: none;
+        }
+    }
 }

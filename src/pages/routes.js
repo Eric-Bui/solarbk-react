@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-const HomePage = lazy(() => import('./Home/Home'));
+const ListProject = lazy(() => import('./ListProject/ListProject'));
 const Detail = lazy(() => import('./Detail/Detail'));
 const Info = lazy(() => import('./Info/Info'));
 const Login = lazy(() => import('./Login/Login'));
@@ -10,13 +10,13 @@ export default [
         path: '/',
         exact: true,
         component: Login,
-        name: 'Home',
+        name: 'LoginComponent',
     },
     {
-        path: '/home',
+        path: '/list-project',
         exact: true,
-        component: HomePage,
-        name: 'Home',
+        component: ListProject,
+        name: 'ListProjectComponent',
     },
     {
         path: '/detail',

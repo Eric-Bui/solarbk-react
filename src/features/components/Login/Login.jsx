@@ -1,8 +1,7 @@
 import { unwrapResult } from '@reduxjs/toolkit';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { login } from '../../Auth/userSlice';
@@ -14,6 +13,7 @@ Login.propTypes = {
 
 function Login(props) {
     const { closeRegister } = props;
+    const history = useHistory();
     const dispatch = useDispatch();
     const notify = (type, message) => toast[type](`${message}`);
 
@@ -23,10 +23,9 @@ function Login(props) {
             const resultAction = await dispatch(action);
             const user = unwrapResult(resultAction);
             console.log('new User', user);
-            <Redirect to="/home" />
-            // if (closeRegister) {
-            //     closeRegister();
-            // }
+            if (user.token) {
+                history.push('/list-project');
+            }
         } catch (err) {
             console.log('Error', err);
             notify('error', err.message || 'Something went wrong');

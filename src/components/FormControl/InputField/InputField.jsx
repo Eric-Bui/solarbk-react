@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Form from 'react-bootstrap/Form';
 import { Controller } from 'react-hook-form';
+import { Form } from 'react-bootstrap';
 
 InputField.propTypes = {
     form: PropTypes.object.isRequired,

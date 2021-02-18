@@ -1,17 +1,11 @@
-import Login from 'features/components/Login/Login';
-import React, { useState } from 'react';
-import { Button, Modal, Nav, Navbar, Dropdown } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import Register from 'features/components/Register/Register';
-import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faCheckSquare, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { logout } from 'features/Auth/userSlice';
-
-library.add(fab, faCheckSquare, faUserCircle);
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import LogoNavbar from 'assets/images/logo.png';
+import './Header.scss';
+import { Link } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
 
 const MODE = {
     LOGIN: 'login',
@@ -33,64 +27,30 @@ function Header(props) {
         const action = logout();
         dispatch(action);
     };
+
+    const [t, i18n] = useTranslation();
+    const handleChangeLanguage = (lang) => {
+        i18n.changeLanguage(lang);
+    };
     return (
-        <div>
-            <ToastContainer limit={5} />
-            <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="#home" className="mr-auto">
-                    Navbar
-                </Navbar.Brand>
-                <Nav>
-                    <NavLink className="nav-link" to="/home">
-                        Home
-                    </NavLink>
-                    <NavLink className="nav-link" to="/detail">
-                        Detail
-                    </NavLink>
-                    <NavLink className="nav-link" to="/info">
-                        Info
-                    </NavLink>
-                    {!isLoggedIn && <Nav.Link onClick={handleShow}>Login</Nav.Link>}
-                    {isLoggedIn && (
-                        <Dropdown alignRight>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                <FontAwesomeIcon icon="user-circle" size="1x" />
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu menuAlign="left">
-                                <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-                                <Dropdown.Item onClick={handleLogoutClick}>Log out</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    )}
-                </Nav>
+        <div className="navbar-container">
+            <Navbar>
+                <Link to="/" className="navbar-brand">
+                    <img src={LogoNavbar} alt="" />
+                </Link>
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Nav.Link onClick={() => handleChangeLanguage('en')}>English</Nav.Link>
+                    </li>
+                    <li className="nav-item">
+                        <Nav.Link onClick={() => handleChangeLanguage('vi')}>Viet Nam</Nav.Link>
+                    </li>
+                    <li className="nav-item">
+                        <Nav.Link onClick={() => handleChangeLanguage('chi')}>China</Nav.Link>
+                    </li>
+                </ul>
             </Navbar>
-
-            {/* Modal show form register */}
-            <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{mode === MODE.REGISTER ? 'Đăng ký' : 'Đăng nhập'}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {mode === MODE.REGISTER && (
-                        <>
-                            <Register closeRegister={handleClose} />
-                            <Nav.Link onClick={() => setMode(MODE.LOGIN)}>
-                                Already have an account. Click here
-                            </Nav.Link>
-                        </>
-                    )}
-
-                    {mode === MODE.LOGIN && (
-                        <>
-                            <Login closeRegister={handleClose} />
-                            <Nav.Link onClick={() => setMode(MODE.REGISTER)}>
-                                Don't have an account. Click here
-                            </Nav.Link>
-                        </>
-                    )}
-                </Modal.Body>
-            </Modal>
+            <p>{t('thanks.abc')}</p>
         </div>
     );
 }

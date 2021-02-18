@@ -2,12 +2,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputField from 'components/FormControl/InputField/InputField';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import Spinner from 'react-bootstrap/Spinner';
 import './LoginForm.scss'
 import loadingIcon from 'assets/images/loading.svg'
+import { Form } from 'react-bootstrap';
 
 LoginForm.propTypes = {
     onSubmit: PropTypes.func,

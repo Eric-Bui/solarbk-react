@@ -1,4 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
+@font-face {
+    src: url(./assets/fonts/Gilroy-Medium.otf);
+    font-family: Gilroy;
+}
+
+body {
+    font-family: 'Gilroy';
+}
 
 $primary-color: #00c255;
 $secondary-color: #89c941;
@@ -18,9 +26,10 @@ $black-color: #000;
     border-radius: 0;
     box-shadow: none;
     padding: 10px 20px;
+
     border-radius: 8px;
     transition: 0.2s;
-    min-width: 115px;
+    min-width: 125px;
     max-height: 44px;
 
     &:hover {

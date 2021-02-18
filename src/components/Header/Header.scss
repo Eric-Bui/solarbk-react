@@ -1,0 +1,15 @@
+.navbar-container {
+    .navbar {
+        background: #008e43;
+        .navbar-brand {
+            padding: 5px 20px;
+            border-radius: 10px;
+            background: #dfe5ef;
+            cursor: pointer;
+            margin-right: auto;
+            img {
+                width: 100px;
+            }
+        }
+    }
+}
