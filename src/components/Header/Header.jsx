@@ -50,7 +50,6 @@ function Header(props) {
                     </li>
                 </ul>
             </Navbar>
-            <p>{t('thanks.abc')}</p>
         </div>
     );
 }

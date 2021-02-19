@@ -9,15 +9,15 @@ import store from './app/store';
 import './i18n';
 
 ReactDOM.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <Suspense fallback={<div>loading</div>}>
             <Provider store={store}>
                 <BrowserRouter>
                     <App />
                 </BrowserRouter>
             </Provider>
-        </Suspense>
-    </React.StrictMode>,
+        </Suspense>,
+    // </React.StrictMode>,
     document.getElementById('root')
 );
 
