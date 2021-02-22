@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import ReactMapboxGl, { Layer, Feature, Marker, Popup } from 'react-mapbox-gl';
+import markerUrl from 'assets/images/logo-map.png';
 require('dotenv').config();
 
 MapGoogle.propTypes = {
@@ -8,38 +9,55 @@ MapGoogle.propTypes = {
     projectList: PropTypes.array,
 };
 
+const Map = ReactMapboxGl({
+    accessToken: process.env.REACT_APP_MAPBOX_KEY,
+});
+
 function MapGoogle(props) {
+    const [showContent, setShowContent] = useState(false);
     const { projectList } = props;
-    console.log(projectList);
+    // console.log(projectList);
 
     return (
         <Map
-            google={props.google}
-            zoom={14}
-            initialCenter={{
-                lat: 10.7855228,
-                lng: 106.7689657,
+            className="map-container"
+            style="mapbox://styles/mapbox/streets-v8"
+            zoom={[10]}
+            center={[106.7689657, 10.7855228]}
+            containerStyle={{
+                height: '500px',
+                width: '100%',
             }}
         >
-            <Marker
-                title={'The marker`s title will appear as a tooltip.'}
-                name={'SOMA'}
-                position={{ lat: 10.7855228, lng: 106.7689657 }}
-            >
-                <InfoWindow>
-                    <div>
-                        <p>
-                            Click on the map or drag the marker to select location where the
-                            incident occurred
-                        </p>
-                    </div>
-                </InfoWindow>
-            </Marker>
+            {projectList.map((project) => (
+                <div key={project.project_info.project_uid}>
+                    <Marker
+                        onMouseEnter={() => setShowContent(true)}
+                        onMouseLeave={() => setShowContent(false)}
+                        coordinates={[project.project_info.project_longitude, project.project_info.project_latitude]}
+                        anchor="bottom"
+                    >
+                        <img
+                            style={{ height: '40px', width: '40px', cursor: 'pointer' }}
+                            src={markerUrl}
+                        />
+                    </Marker>
+                    {showContent && (
+                        <Popup
+                            coordinates={[project.project_info.project_longitude, project.project_info.project_latitude]}
+                            offset={{
+                                'bottom-left': [12, -38],
+                                bottom: [0, -38],
+                                'bottom-right': [-12, -38],
+                            }}
+                        >
+                            <h1>Popup</h1>
+                        </Popup>
+                    )}
+                </div>
+            ))}
         </Map>
     );
 }
 
-export default GoogleApiWrapper((props) => ({
-    apiKey: process.env.REACT_APP_KEY_GOOGLE,
-    language: props.language,
-}))(MapGoogle);
+export default MapGoogle;

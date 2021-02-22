@@ -11,7 +11,6 @@ import useFetchProjectList from 'hooks/useFetchProjectList';
 ListProject.propTypes = {};
 
 function ListProject(props) {
-    const [language, setLanguage] = useState('en');
     const [t] = useTranslation();
    const projectList = useFetchProjectList();
     return (
@@ -25,7 +24,7 @@ function ListProject(props) {
                 </Col>
                 <Col xl="5">
                     <div style={{ height: '500px', width: '100%' }}>
-                        <MapGoogle projectList={projectList} language={language}/>
+                        <MapGoogle projectList={projectList} language='vi'/>
                     </div>
                 </Col>
             </Row>
