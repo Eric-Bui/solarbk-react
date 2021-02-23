@@ -4,6 +4,8 @@ import './App.scss';
 import Header from './components/Header/Header';
 import routes from './pages/routes';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
     const location = useLocation();

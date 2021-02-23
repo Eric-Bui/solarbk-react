@@ -6,16 +6,22 @@ TableProject.propTypes = {
     data: PropTypes.array,
 };
 
-function TableProject({projectList}) {
+function TableProject({ handleClick ,projectList }) {
     // console.log(projectList);
-    const info = useSelector(state => state.user);
-    console.log(info);
+    const handleChooseProject = (project) => {
+        handleClick(project);
+    } 
     return (
-       <>
-        {projectList.map(project => (
-            <div key={project.project_info.project_uid}>{project.project_info.project_ssoc_name}</div>
-        ))}
-       </>
+        <>
+            {projectList.map((project) => (
+                <div 
+                    key={project.project_info.project_uid}
+                    onClick={() => {handleChooseProject(project)}}
+                >
+                    {project.project_info.project_ssoc_name}
+                </div>
+            ))}
+        </>
     );
 }
 
